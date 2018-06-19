@@ -1,3 +1,4 @@
+
 <html>
     <head>
         <title>Cards</title>
@@ -17,6 +18,33 @@
 			    return suit === 0 ? 'spades' : suit === 1 ? 'hearts' : suit === 2 ? 'clubs' : suit === 3 ? 'diamonds' : 'joker';
 			  }
 
+			  function sortCards(obj) {
+				obj.clubs = [];
+				obj.diamonds = [];
+				obj.spades = [];
+				obj.hearts = [];
+
+				for (i=0, len=obj.length; i<len; i++) {
+				    var currentCard = obj[i];
+				    switch (currentCard.suit) {
+				    	case 2:
+				    		obj.clubs.push(currentCard);
+				    		break;
+				    	case 3:
+				    		obj.diamonds.push(currentCard);
+				    		break;
+				    	case 0:
+				    		obj.spades.push(currentCard);
+				    		break;
+				    	case 1:
+				    		obj.hearts.push(currentCard);
+				    		break;
+				    }
+				}
+				obj.cards = obj.clubs.concat(obj.diamonds, obj.spades, obj.hearts)
+				return obj;
+			  }
+
 			  //club2 diamond3 spade0 hearts1
 			var $container = document.getElementById('container')
 			var $hand1 = document.getElementById('hand1')
@@ -30,65 +58,22 @@
 			deck.mount($container)
 
 			var hand1 = deck.cards.splice(1, 7);
-			// hand1.mount($hand1)
+
+			hand1 = sortCards(hand1);
 			console.log(hand1)
-
-			var handOne = {};
-			handOne.clubs = [];
-			handOne.diamonds = [];
-			handOne.spades = [];
-			handOne.hearts = [];
 			
-
-			for (i=0, len=hand1.length; i<len; i++) {
+			for (i=0, len=hand1.cards.length; i<len; i++) {
 				// console.log(deck.SuitName(hand1[i].suit))
 				// hand1[i].mount($hand1)
-				hand1[i].enableDragging()
-			    hand1[i].setSide('front')
+				hand1.cards[i].enableDragging()
+			    hand1.cards[i].setSide('front')
 				
 			    // explode
-			//     hand1[i].animateTo({
-			//         delay: 1000 + i * 2, // wait 1 second + i * 2 ms
-			//         duration: 500,
-			// 		ease: 'quartOut',
-			//     x: 10 + 60*i,
-			//     y: -410+150
-			        
-			// /*         x: Math.random() * window.innerWidth - window.innerWidth / 2,
-			//         y: Math.random() * window.innerHeight - window.innerHeight / 2
-			//          */    
-			//     })
-
-			    var currentCard = hand1[i];
-			    switch (currentCard.suit) {
-			    	case 2:
-			    		handOne.clubs.push(currentCard);
-			    		break;
-			    	case 3:
-			    		handOne.diamonds.push(currentCard);
-			    		break;
-			    	case 0:
-			    		handOne.spades.push(currentCard);
-			    		break;
-			    	case 1:
-			    		handOne.hearts.push(currentCard);
-			    		break;
-			    }
-			}
-
-			handOne.cards = handOne.clubs.concat(handOne.diamonds, handOne.spades, handOne.hearts);
-			for (i=0, len=handOne.cards.length; i<len; i++) {
-				// console.log(deck.SuitName(hand1[i].suit))
-				// hand1[i].mount($hand1)
-				handOne.cards[i].enableDragging()
-			    handOne.cards[i].setSide('front')
-				
-			    // explode
-			    handOne.cards[i].animateTo({
+			    hand1.cards[i].animateTo({
 			        delay: 1000 + i * 2, // wait 1 second + i * 2 ms
 			        duration: 500,
 					ease: 'quartOut',
-			    x: -300 + 60*i,
+			    x: -300 + 100*i,
 			    y: -410+150
 			        
 			/*         x: Math.random() * window.innerWidth - window.innerWidth / 2,
@@ -97,24 +82,20 @@
 			    })
 			}
 
-
-			console.log("handOne", handOne);
-
-
 			var hand2 = deck.cards.splice(1, 7);
-			// console.log(hand2)
-
-			for (i=0, len=hand2.length; i<len; i++) {
+			var hand2 = sortCards(hand2);
+			console.log(hand2)
+			for (i=0, len=hand2.cards.length; i<len; i++) {
 				// console.log(deck.SuitName(hand2[i].suit))
-				hand2[i].enableDragging()
-			    hand2[i].setSide('front')
+				hand2.cards[i].enableDragging()
+			    hand2.cards[i].setSide('front')
 				
 			    // explode
-			    hand2[i].animateTo({
+			    hand2.cards[i].animateTo({
 			        delay: 1000 + i * 2, // wait 1 second + i * 2 ms
 			        duration: 500,
 					ease: 'quartOut',
-			    x: 10+ 60*i,
+			    x: -300+ 100*i,
 			    y: -290 + 150
 			        
 			/*         x: Math.random() * window.innerWidth - window.innerWidth / 2,
@@ -125,20 +106,21 @@
 
 
 			var hand3 = deck.cards.splice(1, 7);
+			var hand3 = sortCards(hand3);
 			// console.log(hand3)
 
-			for (i=0, len=hand3.length; i<len; i++) {
+			for (i=0, len=hand3.cards.length; i<len; i++) {
 				// console.log(deck.SuitName(hand3[i].suit))
-				hand3[i].enableDragging()
-			    hand3[i].setSide('front')
+				hand3.cards[i].enableDragging()
+			    hand3.cards[i].setSide('front')
 				
 			    // explode
-			    hand3[i].animateTo({
+			    hand3.cards[i].animateTo({
 			        delay: 1000 + i * 2, // wait 1 second + i * 2 ms
 			        duration: 500,
 					ease: 'quartOut',
-			    x: 10+ 60*i,
-			    y: -170+250
+			    x: -300+ 100*i,
+			    y: -100+250
 			        
 			/*         x: Math.random() * window.innerWidth - window.innerWidth / 2,
 			        y: Math.random() * window.innerHeight - window.innerHeight / 2
