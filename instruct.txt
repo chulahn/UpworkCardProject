@@ -1,0 +1,14 @@
+The code will deal three sets of 7 cards, face up (see my attachment code). Each of the sets of three cards should be sorted by suit in the order of clubs, diamonds, spades, hearts. The goal is for the user to add up each suit and give each of the 4 numbers in order (buttons going from 0 to 13).
+
+For example, a valid and typical result might be:
+
+4,7,5,5
+The user would hit the numbers 4755. Notice this must equal 21 (7*3).
+
+The user is presented with a result (correct) or incorrect with a chance to correct.
+
+There should also be a timer to see how long this takes and a button to start over. Bonus for keeping track of accuracy across rounds (5/5 correct, etc).
+
+Please use the attached code as a starting point. It was meant as a proof of concept until I realized I would be better off outsourcing it. I do request you continue to use deck.min.js for the cards though, as I am comfortable with that library.
+
+I have a bunch of needs around this use case (other logic, etc) and my intent is to find someone I like working with and have a continuing relationship. I hope that can be you!
