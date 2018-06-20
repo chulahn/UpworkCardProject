@@ -11,6 +11,44 @@
         <div id="container"></div>
         <div id="hand1" style="position: relative; width: 728px; margin: auto;"></div>
 
+        <footer id="buttonBar">
+        	<section id="clubButtons">
+        		How many clubs? <br/>
+
+        		<button>0
+        		</button>
+        		<button>1
+        		</button>
+        		<button>2
+        		</button>
+        		<button>3
+        		</button>
+        		<button>4
+        		</button>
+        		<button>5
+        		</button>
+        		<button>6
+        		</button>
+        		<button>7
+        		</button>
+        		<button>8
+        		</button>
+        		<button>9
+        		</button>
+        		<button>10
+        		</button>
+        		<button>11
+        		</button>
+        		<button>12
+        		</button>
+        		<button>13
+        		</button>
+
+        	</section>
+        	
+        	
+        </footer>
+
         <script>
 
 			  function SuitName(suit) {
@@ -24,20 +62,30 @@
 				obj.spades = [];
 				obj.hearts = [];
 
+				obj.clubCount = 0;
+				obj.diamondCount = 0;
+				obj.spadeCount = 0;
+				obj.heartCount = 0;
+
 				for (i=0, len=obj.length; i<len; i++) {
 				    var currentCard = obj[i];
 				    switch (currentCard.suit) {
 				    	case 2:
+				    		console.log(currentCard);
 				    		obj.clubs.push(currentCard);
+				    		obj.clubCount++;
 				    		break;
 				    	case 3:
 				    		obj.diamonds.push(currentCard);
+				    		obj.diamondCount++;
 				    		break;
 				    	case 0:
 				    		obj.spades.push(currentCard);
+				    		obj.spadeCount++;
 				    		break;
 				    	case 1:
 				    		obj.hearts.push(currentCard);
+				    		obj.heartCount++;
 				    		break;
 				    }
 				}
@@ -45,112 +93,141 @@
 				return obj;
 			  }
 
+			  function countOccurrences() {
+			  	var allHands = {};
+			  	allHands.clubCount = hand1.clubCount + hand2.clubCount + hand3.clubCount;
+			  	allHands.diamondCount = hand1.diamondCount + hand2.diamondCount + hand3.diamondCount;
+			  	allHands.spadeCount = hand1.spadeCount + hand2.spadeCount + hand3.spadeCount;
+			  	allHands.heartCount = hand1.heartCount + hand2.heartCount + hand3.heartCount;
+
+
+			  	return allHands;
+			  }
+
 			  //club2 diamond3 spade0 hearts1
-			var $container = document.getElementById('container')
-			var $hand1 = document.getElementById('hand1')
+				var $container = document.getElementById('container')
+				var $hand1 = document.getElementById('hand1')
 
-			// create Deck
-			var deck = Deck()
-			// console.log(this.SuitName(0))
-			deck.shuffle()
+				// create Deck
+				var deck = Deck()
+				// console.log(this.SuitName(0))
+				deck.shuffle()
 
-			// add to DOM
-			deck.mount($container)
+				// add to DOM
+				deck.mount($container)
 
-			var hand1 = deck.cards.splice(1, 7);
+				var hand1 = deck.cards.splice(1, 7);
 
-			hand1 = sortCards(hand1);
-			console.log(hand1)
-			
-			for (i=0, len=hand1.cards.length; i<len; i++) {
-				// console.log(deck.SuitName(hand1[i].suit))
-				// hand1[i].mount($hand1)
-				hand1.cards[i].enableDragging()
-			    hand1.cards[i].setSide('front')
+				hand1 = sortCards(hand1);
+				console.log(hand1)
 				
-			    // explode
-			    hand1.cards[i].animateTo({
-			        delay: 1000 + i * 2, // wait 1 second + i * 2 ms
-			        duration: 500,
-					ease: 'quartOut',
-			    x: -300 + 100*i,
-			    y: -410+150
-			        
-			/*         x: Math.random() * window.innerWidth - window.innerWidth / 2,
-			        y: Math.random() * window.innerHeight - window.innerHeight / 2
-			         */    
-			    })
-			}
+				for (i=0, len=hand1.cards.length; i<len; i++) {
+					// console.log(deck.SuitName(hand1[i].suit))
+					// hand1[i].mount($hand1)
+					hand1.cards[i].enableDragging()
+				    hand1.cards[i].setSide('front')
+					
+				    // explode
+				    hand1.cards[i].animateTo({
+				        delay: 1000 + i * 2, // wait 1 second + i * 2 ms
+				        duration: 500,
+						ease: 'quartOut',
+				    x: -300 + 100*i,
+				    y: -410+150
+				        
+				/*         x: Math.random() * window.innerWidth - window.innerWidth / 2,
+				        y: Math.random() * window.innerHeight - window.innerHeight / 2
+				         */    
+				    })
+				}
 
-			var hand2 = deck.cards.splice(1, 7);
-			var hand2 = sortCards(hand2);
-			console.log(hand2)
-			for (i=0, len=hand2.cards.length; i<len; i++) {
-				// console.log(deck.SuitName(hand2[i].suit))
-				hand2.cards[i].enableDragging()
-			    hand2.cards[i].setSide('front')
-				
-			    // explode
-			    hand2.cards[i].animateTo({
-			        delay: 1000 + i * 2, // wait 1 second + i * 2 ms
-			        duration: 500,
-					ease: 'quartOut',
-			    x: -300+ 100*i,
-			    y: -290 + 150
-			        
-			/*         x: Math.random() * window.innerWidth - window.innerWidth / 2,
-			        y: Math.random() * window.innerHeight - window.innerHeight / 2
-			         */    
-			    })
-			}
-
-
-			var hand3 = deck.cards.splice(1, 7);
-			var hand3 = sortCards(hand3);
-			// console.log(hand3)
-
-			for (i=0, len=hand3.cards.length; i<len; i++) {
-				// console.log(deck.SuitName(hand3[i].suit))
-				hand3.cards[i].enableDragging()
-			    hand3.cards[i].setSide('front')
-				
-			    // explode
-			    hand3.cards[i].animateTo({
-			        delay: 1000 + i * 2, // wait 1 second + i * 2 ms
-			        duration: 500,
-					ease: 'quartOut',
-			    x: -300+ 100*i,
-			    y: -100+250
-			        
-			/*         x: Math.random() * window.innerWidth - window.innerWidth / 2,
-			        y: Math.random() * window.innerHeight - window.innerHeight / 2
-			         */    
-			    })
-			}
-
-			// deck.unmount();
+				var hand2 = deck.cards.splice(1, 7);
+				var hand2 = sortCards(hand2);
+				console.log(hand2)
+				for (i=0, len=hand2.cards.length; i<len; i++) {
+					// console.log(deck.SuitName(hand2[i].suit))
+					hand2.cards[i].enableDragging()
+				    hand2.cards[i].setSide('front')
+					
+				    // explode
+				    hand2.cards[i].animateTo({
+				        delay: 1000 + i * 2, // wait 1 second + i * 2 ms
+				        duration: 500,
+						ease: 'quartOut',
+				    x: -300+ 100*i,
+				    y: -290 + 150
+				        
+				/*         x: Math.random() * window.innerWidth - window.innerWidth / 2,
+				        y: Math.random() * window.innerHeight - window.innerHeight / 2
+				         */    
+				    })
+				}
 
 
-			// for (i=0, len=7; i < len; i++) {
-			// 	deck.cards[i].enableDragging()
-			//     deck.cards[i].setSide('front')
-				
-			//     // explode
-			//     deck.cards[i].animateTo({
-			//         delay: 1000 + i * 2, // wait 1 second + i * 2 ms
-			//         duration: 500,
-			// 		ease: 'quartOut',
-			//     x: 10 + 30*i,
-			//     y: -110
-			        
-			// /*         x: Math.random() * window.innerWidth - window.innerWidth / 2,
-			//         y: Math.random() * window.innerHeight - window.innerHeight / 2
-			//          */    
-			//     })
-			// }
+				var hand3 = deck.cards.splice(1, 7);
+				var hand3 = sortCards(hand3);
+				// console.log(hand3)
 
-			// console.log(deck)
+				for (i=0, len=hand3.cards.length; i<len; i++) {
+					// console.log(deck.SuitName(hand3[i].suit))
+					hand3.cards[i].enableDragging()
+				    hand3.cards[i].setSide('front')
+					
+				    // explode
+				    hand3.cards[i].animateTo({
+				        delay: 1000 + i * 2, // wait 1 second + i * 2 ms
+				        duration: 500,
+						ease: 'quartOut',
+				    x: -300+ 100*i,
+				    y: -100+250
+				        
+				/*         x: Math.random() * window.innerWidth - window.innerWidth / 2,
+				        y: Math.random() * window.innerHeight - window.innerHeight / 2
+				         */    
+				    })
+				}
 
+				// deck.unmount();
+
+
+				// for (i=0, len=7; i < len; i++) {
+				// 	deck.cards[i].enableDragging()
+				//     deck.cards[i].setSide('front')
+					
+				//     // explode
+				//     deck.cards[i].animateTo({
+				//         delay: 1000 + i * 2, // wait 1 second + i * 2 ms
+				//         duration: 500,
+				// 		ease: 'quartOut',
+				//     x: 10 + 30*i,
+				//     y: -110
+				        
+				// /*         x: Math.random() * window.innerWidth - window.innerWidth / 2,
+				//         y: Math.random() * window.innerHeight - window.innerHeight / 2
+				//          */    
+				//     })
+				// }
+
+				// console.log(deck)
+
+
+
+				document.addEventListener('click', function (event) {
+					// console.log(event.path)
+
+					//clicked a clubButton
+					if (event.path[0].localName === "button"  && event.path[1].id === "clubButtons") {
+						var occurrences = countOccurrences();
+
+						if (occurrences.clubCount == event.target.innerHTML) {
+							alert("Correct");
+						}
+						else {
+							alert("Wrong");
+						}
+					}
+
+				}, false);
         </script>
     </body>
 </html>
