@@ -4,6 +4,16 @@
         <title>Cards</title>
 
         <link rel="stylesheet" href="https://deck-of-cards.js.org/example.css">
+        <style>
+         #guessButtons > button {
+         	width: 25px;
+         	height: 25px;
+         }
+
+         #guessSuits, #redealCards {
+         	font-size: 18px;
+         }
+        </style>
     </head>
     <body>
         <script src="https://deck-of-cards.js.org/dist/deck.min.js"></script>
@@ -13,7 +23,7 @@
 
         <footer id="buttonBar">
         	<section id="guessButtons">
-        		Guess <br/>
+        		Input Suit Guess <br/>
 
         		<button>0
         		</button>
@@ -28,7 +38,7 @@
         		<button>5
         		</button>
         		<button>6
-        		</button>
+        		</button><br>
         		<button>7
         		</button>
         		<button>8
@@ -49,6 +59,8 @@
 	        <span id="currentGuess"></span>	
         	
         	<button id="guessSuits">Guess</button>
+        	<button id="redealCards">Redeal Cards</button>
+        	<span id="timer"></span>
         </footer>
 
         <script>
@@ -189,6 +201,87 @@
 				    })
 				}
 
+				function redealCards() {
+					deck.unmount();
+					deck = Deck()
+					// console.log(this.SuitName(0))
+					deck.shuffle()
+
+					// add to DOM
+					deck.mount($container)
+
+					hand1 = deck.cards.splice(1, 7);
+
+					hand1 = sortCards(hand1);
+					console.log(hand1)
+					
+					for (i=0, len=hand1.cards.length; i<len; i++) {
+						// console.log(deck.SuitName(hand1[i].suit))
+						// hand1[i].mount($hand1)
+						hand1.cards[i].enableDragging()
+					    hand1.cards[i].setSide('front')
+						
+					    // explode
+					    hand1.cards[i].animateTo({
+					        delay: 1000 + i * 2, // wait 1 second + i * 2 ms
+					        duration: 500,
+							ease: 'quartOut',
+					    x: -300 + 100*i,
+					    y: -410+150
+					        
+					/*         x: Math.random() * window.innerWidth - window.innerWidth / 2,
+					        y: Math.random() * window.innerHeight - window.innerHeight / 2
+					         */    
+					    })
+					}
+
+					hand2 = deck.cards.splice(1, 7);
+					hand2 = sortCards(hand2);
+					console.log(hand2)
+					for (i=0, len=hand2.cards.length; i<len; i++) {
+						// console.log(deck.SuitName(hand2[i].suit))
+						hand2.cards[i].enableDragging()
+					    hand2.cards[i].setSide('front')
+						
+					    // explode
+					    hand2.cards[i].animateTo({
+					        delay: 1000 + i * 2, // wait 1 second + i * 2 ms
+					        duration: 500,
+							ease: 'quartOut',
+					    x: -300+ 100*i,
+					    y: -290 + 150
+					        
+					/*         x: Math.random() * window.innerWidth - window.innerWidth / 2,
+					        y: Math.random() * window.innerHeight - window.innerHeight / 2
+					         */    
+					    })
+					}
+
+
+					hand3 = deck.cards.splice(1, 7);
+					hand3 = sortCards(hand3);
+					// console.log(hand3)
+
+					for (i=0, len=hand3.cards.length; i<len; i++) {
+						// console.log(deck.SuitName(hand3[i].suit))
+						hand3.cards[i].enableDragging()
+					    hand3.cards[i].setSide('front')
+						
+					    // explode
+					    hand3.cards[i].animateTo({
+					        delay: 1000 + i * 2, // wait 1 second + i * 2 ms
+					        duration: 500,
+							ease: 'quartOut',
+					    x: -300+ 100*i,
+					    y: -100+250
+					        
+					/*         x: Math.random() * window.innerWidth - window.innerWidth / 2,
+					        y: Math.random() * window.innerHeight - window.innerHeight / 2
+					         */    
+					    })
+					}
+				}
+
 				// deck.unmount();
 
 
@@ -263,7 +356,11 @@
 						}
 						
 					}
-
+					if (event.target.id === "redealCards") {
+						redealCards();
+			
+						
+					}
 				}, false);
         </script>
     </body>
