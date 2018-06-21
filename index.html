@@ -60,7 +60,7 @@
         	
         	<button id="guessSuits">Guess</button>
         	<button id="redealCards">Redeal Cards</button>
-        	<span id="timer"></span>
+        	Timer: <span id="timer">0</span>
         </footer>
 
         <script>
@@ -202,6 +202,9 @@
 				}
 
 				function redealCards() {
+					time = 0;
+					document.querySelector("#timer").innerText = time;
+
 					deck.unmount();
 					deck = Deck()
 					// console.log(this.SuitName(0))
@@ -280,6 +283,11 @@
 					         */    
 					    })
 					}
+
+					timer = setInterval(function() {
+										time++;
+										document.querySelector("#timer").innerText = time;
+									}, 1000)
 				}
 
 				// deck.unmount();
@@ -304,6 +312,12 @@
 				// }
 
 				// console.log(deck)
+				var time = 0;
+
+				var timer = setInterval(function() {
+					time++;
+					document.querySelector("#timer").innerText = time;
+				}, 1000)
 
 				var userGuesses = [];
 
@@ -343,6 +357,7 @@
 
 							if (correct.clubCount == userClubGuess && correct.diamondCount == userDiamondGuess && correct.spadeCount == userSpadeGuess && correct.heartCount == userHeartGuess ) {
 								alert("Correct");
+								clearInterval(timer);
 							}
 							else {
 								alert("Wrong");
