@@ -15,38 +15,92 @@
         	<section id="clubButtons">
         		How many clubs? <br/>
 
-        		<button>0
-        		</button>
-        		<button>1
-        		</button>
-        		<button>2
-        		</button>
-        		<button>3
-        		</button>
-        		<button>4
-        		</button>
-        		<button>5
-        		</button>
-        		<button>6
-        		</button>
-        		<button>7
-        		</button>
-        		<button>8
-        		</button>
-        		<button>9
-        		</button>
-        		<button>10
-        		</button>
-        		<button>11
-        		</button>
-        		<button>12
-        		</button>
-        		<button>13
-        		</button>
+        		<form>
+        		  <input type="radio" name="clubGuess" value=0 checked>0
+        		  <input type="radio" name="clubGuess" value=1>1
+        		  <input type="radio" name="clubGuess" value=2>2
+        		  <input type="radio" name="clubGuess" value=3>3
+        		  <input type="radio" name="clubGuess" value=4>4
+        		  <input type="radio" name="clubGuess" value=5>5
+        		  <input type="radio" name="clubGuess" value=6>6<br>
+        		  <input type="radio" name="clubGuess" value=7>7
+        		  <input type="radio" name="clubGuess" value=8>8
+        		  <input type="radio" name="clubGuess" value=9>9
+        		  <input type="radio" name="clubGuess" value=10>10
+        		  <input type="radio" name="clubGuess" value=11>11
+        		  <input type="radio" name="clubGuess" value=12>12
+        		  <input type="radio" name="clubGuess" value=13>13
+        		</form>
+
+        	</section>
+
+        	<section id="diamondButtons">
+        		How many diamonds? <br/>
+
+        		<form>
+        		  <input type="radio" name="diamondGuess" value=0 checked>0
+        		  <input type="radio" name="diamondGuess" value=1>1
+        		  <input type="radio" name="diamondGuess" value=2>2
+        		  <input type="radio" name="diamondGuess" value=3>3
+        		  <input type="radio" name="diamondGuess" value=4>4
+        		  <input type="radio" name="diamondGuess" value=5>5
+        		  <input type="radio" name="diamondGuess" value=6>6<br>
+        		  <input type="radio" name="diamondGuess" value=7>7
+        		  <input type="radio" name="diamondGuess" value=8>8
+        		  <input type="radio" name="diamondGuess" value=9>9
+        		  <input type="radio" name="diamondGuess" value=10>10
+        		  <input type="radio" name="diamondGuess" value=11>11
+        		  <input type="radio" name="diamondGuess" value=12>12
+        		  <input type="radio" name="diamondGuess" value=13>13
+        		</form>
+
+        	</section>
+
+        	<section id="spadeButtons">
+        		How many spades? <br/>
+
+        		<form>
+        		  <input type="radio" name="spadeGuess" value=0 checked>0
+        		  <input type="radio" name="spadeGuess" value=1>1
+        		  <input type="radio" name="spadeGuess" value=2>2
+        		  <input type="radio" name="spadeGuess" value=3>3
+        		  <input type="radio" name="spadeGuess" value=4>4
+        		  <input type="radio" name="spadeGuess" value=5>5
+        		  <input type="radio" name="spadeGuess" value=6>6<br>
+        		  <input type="radio" name="spadeGuess" value=7>7
+        		  <input type="radio" name="spadeGuess" value=8>8
+        		  <input type="radio" name="spadeGuess" value=9>9
+        		  <input type="radio" name="spadeGuess" value=10>10
+        		  <input type="radio" name="spadeGuess" value=11>11
+        		  <input type="radio" name="spadeGuess" value=12>12
+        		  <input type="radio" name="spadeGuess" value=13>13
+        		</form>
+
+        	</section>
+
+        	<section id="heartButtons">
+        		How many hearts? <br/>
+
+        		<form>
+        		  <input type="radio" name="heartGuess" value=0 checked>0
+        		  <input type="radio" name="heartGuess" value=1>1
+        		  <input type="radio" name="heartGuess" value=2>2
+        		  <input type="radio" name="heartGuess" value=3>3
+        		  <input type="radio" name="heartGuess" value=4>4
+        		  <input type="radio" name="heartGuess" value=5>5
+        		  <input type="radio" name="heartGuess" value=6>6<br>
+        		  <input type="radio" name="heartGuess" value=7>7
+        		  <input type="radio" name="heartGuess" value=8>8
+        		  <input type="radio" name="heartGuess" value=9>9
+        		  <input type="radio" name="heartGuess" value=10>10
+        		  <input type="radio" name="heartGuess" value=11>11
+        		  <input type="radio" name="heartGuess" value=12>12
+        		  <input type="radio" name="heartGuess" value=13>13
+        		</form>
 
         	</section>
         	
-        	
+        	<button id="guessSuits">Guess</button>
         </footer>
 
         <script>
@@ -214,18 +268,24 @@
 
 				document.addEventListener('click', function (event) {
 					// console.log(event.path)
+					//console.log(event);
 
-					//clicked a clubButton
-					if (event.path[0].localName === "button"  && event.path[1].id === "clubButtons") {
+					if (event.target.id === "guessSuits") {
+
+						var correctClubCount = document.querySelector('input[name="clubGuess"]:checked').value;
+						var correctDiamondCount = document.querySelector('input[name="diamondGuess"]:checked').value;
+						var correctSpadeCount = document.querySelector('input[name="spadeGuess"]:checked').value;
+						var correctHeartCount = document.querySelector('input[name="heartGuess"]:checked').value;
+
 						var occurrences = countOccurrences();
 
-						if (occurrences.clubCount == event.target.innerHTML) {
+						if (occurrences.clubCount == correctClubCount && occurrences.diamondCount == correctDiamondCount && occurrences.spadeCount == correctSpadeCount && occurrences.heartCount == correctHeartCount ) {
 							alert("Correct");
 						}
 						else {
 							alert("Wrong");
 						}
-					}
+					}					
 
 				}, false);
         </script>
